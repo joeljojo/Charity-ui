@@ -2,7 +2,8 @@
   "extends": [
     "airbnb",
     "plugin:prettier/recommended",
-    "prettier/react"
+    "plugin:react/recommended",
+    "prettier"
   ],
   "env": {
     "browser": true,
@@ -19,13 +20,19 @@
       {
         "code": 80,
         "tabWidth": 2,
-        "comments": 80,
+        "comments": 80
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
         "ignoreComments": false,
         "ignoreTrailingComments": true,
         "ignoreUrls": true,
         "ignoreStrings": true,
         "ignoreTemplateLiterals": true,
-        "ignoreRegExpLiterals": true
+        "ignoreRegExpLiterals": true,
+        "endOfLine": "auto"
       }
     ]
   }
