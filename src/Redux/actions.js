@@ -1,10 +1,11 @@
 import Axios from 'axios';
-import * as actions from './actionTypes';
+// import * as actions from './actionTypes';
+import { ADD_USER, LOGIN } from './actionTypes';
 import { baseUrl } from './Services/config';
 
 const addUser = (user) => async (dispatch) => {
   dispatch({
-    type: actions.ADD_USER.REQUEST,
+    type: ADD_USER.REQUEST,
   });
 
   try {
@@ -12,28 +13,28 @@ const addUser = (user) => async (dispatch) => {
     const response = await Axios.post(`${baseUrl}/register`, user);
     if (response.data.status) {
       dispatch({
-        type: actions.ADD_USER.SUCCESS,
+        type: ADD_USER.SUCCESS,
         message: response.data.message,
         user: response.data.user,
         status: response.data.status,
       });
     } else {
       dispatch({
-        type: actions.ADD_USER.FAIL,
+        type: ADD_USER.FAIL,
         message: response.data.message,
         status: response.data.staus,
       });
     }
   } catch (err) {
     dispatch({
-      type: actions.ADD_USER.FAIL,
+      type: ADD_USER.FAIL,
       message: err.message,
     });
   }
 };
 const login = (user) => async (dispatch) => {
   dispatch({
-    type: actions.LOGIN.REQUEST,
+    type: LOGIN.REQUEST,
   });
 
   try {
@@ -41,7 +42,7 @@ const login = (user) => async (dispatch) => {
     const response = await Axios.post(`${baseUrl}/login`, user);
     if (response.data.status) {
       dispatch({
-        type: actions.LOGIN.SUCCESS,
+        type: LOGIN.SUCCESS,
         userId: response.data.userID,
         firstName: response.data.firstname,
         lastName: response.data.lastname,
@@ -54,14 +55,14 @@ const login = (user) => async (dispatch) => {
       });
     } else {
       dispatch({
-        type: actions.LOGIN.FAIL,
+        type: LOGIN.FAIL,
         message: response.data.message,
         status: response.data.status,
       });
     }
   } catch (err) {
     dispatch({
-      type: actions.LOGIN.FAIL,
+      type: LOGIN.FAIL,
       message: err.message,
     });
   }

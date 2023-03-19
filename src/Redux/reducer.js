@@ -1,4 +1,6 @@
-import * as actions from './actionTypes';
+// import * as actions from './actionTypes';
+
+import { LOGIN } from './actionTypes';
 
 const initialUserState = {
   user: {},
@@ -9,7 +11,7 @@ const initialUserState = {
 };
 const loginReducer = (state = initialUserState, action = {}) => {
   switch (action.type) {
-    case actions.LOGIN.RESUEST:
+    case LOGIN.REQUEST:
       return {
         ...state,
         error: '',
@@ -18,7 +20,7 @@ const loginReducer = (state = initialUserState, action = {}) => {
         status: false,
       };
 
-    case actions.LOGIN.SUCCESS:
+    case LOGIN.SUCCESS:
       return {
         ...state,
         user: action.user,
@@ -27,7 +29,7 @@ const loginReducer = (state = initialUserState, action = {}) => {
         message: action.message,
         status: action.status,
       };
-    case actions.LOGIN.FAIL:
+    case LOGIN.FAIL:
       return {
         ...state,
         user: {},
