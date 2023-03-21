@@ -15,7 +15,6 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import Axios from 'axios';
 import { useDispatch } from 'react-redux';
 import Image from '../../Images/login-image.jpg';
 import { login } from '../../Redux/actions';
@@ -27,15 +26,8 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // console.log(data);
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // });
     const user = { email: data.get('email'), password: data.get('password') };
-    // const response = Axios.post('http://localhost:8000/login', user);
-    // console.log(response.data);
-
+    // Dispatch user action
     dispatch(login(user));
   };
 

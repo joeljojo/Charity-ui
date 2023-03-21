@@ -15,14 +15,13 @@ const addUser = (user) => async (dispatch) => {
       dispatch({
         type: ADD_USER.SUCCESS,
         message: response.data.message,
-        user: response.data.user,
         status: response.data.status,
       });
     } else {
       dispatch({
         type: ADD_USER.FAIL,
         message: response.data.message,
-        status: response.data.staus,
+        status: response.data.status,
       });
     }
   } catch (err) {
