@@ -43,14 +43,8 @@ const login = (user) => async (dispatch) => {
     if (response.data.status) {
       dispatch({
         type: LOGIN.SUCCESS,
-        userId: response.data.userID,
-        firstName: response.data.firstname,
-        lastName: response.data.lastname,
-        isAdmin: response.data.isadmin,
-        isDonor: response.data.isdonaor,
-        isChildrensHome: response.data.ischildrenshome,
-        message: response.data.message,
         user: response.data.user,
+        message: response.data.message,
         status: response.data.status,
       });
     } else {
