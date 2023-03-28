@@ -23,6 +23,10 @@ const theme = createTheme();
 
 export default function SignUp() {
   const dispatch = useDispatch();
+  const [value, setValue] = React.useState('childrenshome');
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -31,6 +35,8 @@ export default function SignUp() {
       lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
+      childrensHome: data.get('childrenshome'),
+      donor: data.get('donor'),
     };
     dispatch(addUser(user));
   };
@@ -103,16 +109,18 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <RadioGroup row>
+                <RadioGroup value={value} onChange={handleChange} row>
                   <FormControlLabel
-                    value="admin"
-                    control={<Radio />}
-                    label="Admin"
-                  />
-                  <FormControlLabel
+                    name="childrenshome"
                     value="childrenshome"
                     control={<Radio />}
                     label="Childrens Home"
+                  />
+                  <FormControlLabel
+                    name="donor"
+                    value="donor"
+                    control={<Radio />}
+                    label="Donor"
                   />
                 </RadioGroup>
               </Grid>
