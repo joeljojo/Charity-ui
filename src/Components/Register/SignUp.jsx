@@ -129,7 +129,7 @@ export default function SignUp() {
               <Grid item>
                 {' '}
                 Already have an account?
-                <Link sx={{ px: 2 }} href="#h" variant="body2">
+                <Link sx={{ px: 2 }} href="/signin" variant="body2">
                   Sign in
                 </Link>
               </Grid>

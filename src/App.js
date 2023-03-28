@@ -5,12 +5,13 @@ import './App.css';
 import SignUp from './Components/Register/SignUp';
 import AdminDonorDashboard from './Components/Dashboards/AdminDonorDashboard';
 import ChildrensHome from './Components/Dashboards/ChildrensHome';
+import Home from './Components/Home/Home';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route exact path="/" element={<Login />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="signin" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="userdashboard" element={<ChildrensHome />} />
