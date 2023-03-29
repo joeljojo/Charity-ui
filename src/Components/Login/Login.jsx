@@ -16,12 +16,18 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
+// import { Navigate } from 'react-router-dom';
 import Image from '../../Images/login-image.jpg';
 import { login } from '../../Redux/actions';
 
 const theme = createTheme();
 
 export default function Login() {
+  // access logged user && check if is childrenshome from the state
+  const isChildrensHome = useSelector(
+    (state) => state.loginState.user.isChildrensHome
+  );
+
   const dispatch = useDispatch();
   const handleSubmit = (event) => {
     event.preventDefault();
