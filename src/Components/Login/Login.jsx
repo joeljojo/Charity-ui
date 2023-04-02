@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import {
@@ -15,8 +16,8 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
-// import { Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Image from '../../Images/login-image.jpg';
 import { login } from '../../Redux/actions';
 
@@ -24,17 +25,31 @@ const theme = createTheme();
 
 export default function Login() {
   // access logged user && check if is childrenshome from the state
-  const isChildrensHome = useSelector(
-    (state) => state.loginState.user.isChildrensHome
-  );
-
+  const userState = useSelector((state) => state.loginState);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = userState;
+  const childresHome = user.isChildrensHome;
+  if (childresHome !== undefined && childresHome === true) {
+    setTimeout(() => {
+      navigate('/userdashboard');
+    }, 3000);
+  } else if (childresHome !== undefined && childresHome === false) {
+    setTimeout(() => {
+      navigate('/admindonordashboard');
+    }, 3000);
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const user = { email: data.get('email'), password: data.get('password') };
+    const userdata = {
+      email: data.get('email'),
+      password: data.get('password'),
+    };
     // Dispatch user action
-    dispatch(login(user));
+    dispatch(login(userdata));
   };
 
   return (
