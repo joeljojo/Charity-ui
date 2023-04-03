@@ -6,9 +6,12 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import loginReducer from './reducer';
+import { loginReducer, donorsReducer } from './reducer';
 
-const rootReducer = combineReducers({ loginState: loginReducer });
+const rootReducer = combineReducers({
+  loginState: loginReducer,
+  getDonorsState: donorsReducer,
+});
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))

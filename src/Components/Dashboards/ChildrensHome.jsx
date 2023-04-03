@@ -17,7 +17,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-// import Donors from '../Commons/Donors';
+import Donors from '../Commons/Donors';
 
 const drawerWidth = 240;
 
@@ -109,7 +109,7 @@ export default function ChildrensHome() {
       return <h1>All Requets</h1>;
     }
     if (listItem === 'Donors') {
-      return <h1>Donors</h1>;
+      return <Donors />;
     }
     if (listItem === 'Admin Approved') {
       return <h1>Admin Approved</h1>;
@@ -218,7 +218,6 @@ export default function ChildrensHome() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         {loadDrawerHeader()}
-        {/* <Donors /> */}
       </Box>
     </Box>
   );

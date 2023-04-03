@@ -7,7 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { useDispatch } from 'react-redux';
 import RequestButton from './RejectButton';
+import { fetchDonors } from '../../Redux/actions';
 
 const columns = [
   { id: 'id', label: 'Id', minWidth: 170 },
@@ -49,6 +51,8 @@ const rows = [
 ];
 
 export default function RequestsTable() {
+  const dispatch = useDispatch();
+  dispatch(fetchDonors());
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
