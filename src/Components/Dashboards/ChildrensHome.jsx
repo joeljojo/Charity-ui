@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -16,6 +17,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+// import Donors from '../Commons/Donors';
 
 const drawerWidth = 240;
 
@@ -87,6 +89,7 @@ const Drawer = styled(MuiDrawer, {
 export default function ChildrensHome() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [listItem, setListItem] = React.useState(null);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -95,7 +98,32 @@ export default function ChildrensHome() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  const handleOnclick = (text) => {
+    setListItem(text);
+  };
+  const loadDrawerHeader = () => {
+    if (listItem === 'Home') {
+      return <h1>Home</h1>;
+    }
+    if (listItem === 'All Requets') {
+      return <h1>All Requets</h1>;
+    }
+    if (listItem === 'Donors') {
+      return <h1>Donors</h1>;
+    }
+    if (listItem === 'Admin Approved') {
+      return <h1>Admin Approved</h1>;
+    }
+    if (listItem === 'Admin Rejected') {
+      return <h1>Admin Rejected</h1>;
+    }
+    if (listItem === 'Donor Approved') {
+      return <h1>Donor Approved</h1>;
+    }
+    if (listItem === 'Donor Rejected') {
+      return <h1>Donor Rejected</h1>;
+    }
+  };
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -154,7 +182,11 @@ export default function ChildrensHome() {
                     justifyContent: 'center',
                   }}
                 />
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  onClick={() => handleOnclick(text)}
+                  primary={text}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </ListItem>
           ))}
@@ -185,7 +217,8 @@ export default function ChildrensHome() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {/* Load Components here */}
+        {loadDrawerHeader()}
+        {/* <Donors /> */}
       </Box>
     </Box>
   );
