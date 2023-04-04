@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import RequestButton from './RejectButton';
 import { fetchDonors } from '../../Redux/actions';
 
@@ -26,33 +26,35 @@ const columns = [
   },
   { id: 'request', label: 'Make Request', minWidth: 170 },
 ];
-
-function createData(id, firstname, lastname, email) {
-  const request = <RequestButton />;
-  return {
-    id,
-    firstname,
-    lastname,
-    email,
-    request,
-  };
-}
-
-const rows = [
-  createData(
-    '14ae8834-2cf5-4a2b-844a-3e203b593225',
-    'Classes',
-    'Ongoing students do not have enough space to study',
-    'Baraka Chilrens Home',
-    'Nyeri',
-    500,
-    50000
-  ),
-];
-
-export default function RequestsTable() {
+export default function Donors() {
+  const { donors } = useSelector((state) => state.getDonorsState);
   const dispatch = useDispatch();
-  dispatch(fetchDonors());
+  React.useEffect(() => {
+    dispatch(fetchDonors());
+  }, []);
+  function createData(id, firstname, lastname, email) {
+    const request = <RequestButton />;
+    return {
+      id,
+      firstname,
+      lastname,
+      email,
+      request,
+    };
+  }
+
+  const rows = [
+    createData(
+      '14ae8834-2cf5-4a2b-844a-3e203b593225',
+      'Classes',
+      'Ongoing students do not have enough space to study',
+      'Baraka Chilrens Home',
+      'Nyeri',
+      500,
+      50000
+    ),
+  ];
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
