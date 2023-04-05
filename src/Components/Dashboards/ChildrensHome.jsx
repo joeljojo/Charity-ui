@@ -17,6 +17,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import { useNavigate } from 'react-router-dom';
 import Donors from '../Commons/Donors';
 
 const drawerWidth = 240;
@@ -87,6 +88,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function ChildrensHome() {
+  const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [listItem, setListItem] = React.useState(null);
@@ -103,7 +105,7 @@ export default function ChildrensHome() {
   };
   const loadDrawerHeader = () => {
     if (listItem === 'Home') {
-      return <h1>Home</h1>;
+      return navigate('/');
     }
     if (listItem === 'All Requets') {
       return <h1>All Requets</h1>;
