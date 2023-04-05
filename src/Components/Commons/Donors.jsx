@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useDispatch, useSelector } from 'react-redux';
-import RequestButton from './RejectButton';
+import RequestButton from './RequestButton';
 import { fetchDonors } from '../../Redux/actions';
 
 const columns = [
@@ -43,17 +43,14 @@ export default function Donors() {
     };
   }
 
-  const rows = [
-    createData(
-      '14ae8834-2cf5-4a2b-844a-3e203b593225',
-      'Classes',
-      'Ongoing students do not have enough space to study',
-      'Baraka Chilrens Home',
-      'Nyeri',
-      500,
-      50000
-    ),
-  ];
+  const rows = donors.map((donor) => {
+    return createData(
+      donor.userid,
+      donor.firstname,
+      donor.lastname,
+      donor.email
+    );
+  });
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
