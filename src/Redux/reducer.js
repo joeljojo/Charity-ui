@@ -1,6 +1,6 @@
 // import * as actions from './actionTypes';
 
-import { FETCH_DONORS, LOGIN } from './actionTypes';
+import { FETCH_DONORS, LOGIN, FETCH_REQUESTS } from './actionTypes';
 
 const initialUserState = {
   user: {},
@@ -11,6 +11,13 @@ const initialUserState = {
 };
 const initialDonorsState = {
   donors: [],
+  error: null,
+  loading: false,
+  message: '',
+  status: false,
+};
+const initialRequestsState = {
+  requests: [],
   error: null,
   loading: false,
   message: '',
@@ -84,5 +91,39 @@ const donorsReducer = (state = initialDonorsState, action = {}) => {
       return state;
   }
 };
+const allMyRequestsReducer = (state = initialRequestsState, action = {}) => {
+  switch (action.type) {
+    case FETCH_REQUESTS.REQUEST:
+      return {
+        ...state,
+        error: '',
+        loading: true,
+        message: '',
+        status: false,
+      };
 
-export { loginReducer, donorsReducer };
+    case FETCH_REQUESTS.SUCCESS:
+      return {
+        ...state,
+        requests: action.requests,
+        loading: false,
+        error: '',
+        message: action.message,
+        status: action.status,
+      };
+    case FETCH_REQUESTS.FAIL:
+      return {
+        ...state,
+        requests: [],
+        loading: false,
+        error: action.error,
+        message: action.message,
+        status: false,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export { loginReducer, donorsReducer, allMyRequestsReducer };

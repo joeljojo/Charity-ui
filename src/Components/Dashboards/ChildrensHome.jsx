@@ -19,6 +19,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
 import Donors from '../Commons/Donors';
+import AllRequestsTable from '../Commons/AllRequestsTable';
 
 const drawerWidth = 240;
 
@@ -108,7 +109,7 @@ export default function ChildrensHome() {
       return navigate('/');
     }
     if (listItem === 'All Requets') {
-      return <h1>All Requets</h1>;
+      return <AllRequestsTable />;
     }
     if (listItem === 'Donors') {
       return <Donors />;
