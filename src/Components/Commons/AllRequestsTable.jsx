@@ -12,6 +12,11 @@ import { fetchAllMyRequests } from '../../Redux/actions';
 
 const columns = [
   { id: 'id', label: 'Id', minWidth: 170 },
+  {
+    id: 'name',
+    label: ' Facility Name',
+    minWidth: 170,
+  },
   { id: 'title', label: 'Title', minWidth: 100 },
   {
     id: 'description',
@@ -19,8 +24,8 @@ const columns = [
     minWidth: 170,
   },
   {
-    id: 'name',
-    label: ' Name',
+    id: 'number',
+    label: 'No. of Children',
     minWidth: 170,
   },
   {
@@ -28,43 +33,15 @@ const columns = [
     label: 'Location',
     minWidth: 170,
   },
-  {
-    id: 'number',
-    label: 'Children',
-    minWidth: 170,
-  },
+
   {
     id: 'amount',
     label: 'Amount Required',
     minWidth: 170,
   },
 ];
-
-function createData(id, title, description, name, location, number, amount) {
-  return {
-    id,
-    title,
-    description,
-    name,
-    location,
-    number,
-    amount,
-  };
-}
-
-const rows = [
-  createData(
-    '14ae8834-2cf5-4a2b-844a-3e203b593225',
-    'Classes',
-    'Ongoing students do not have enough space to study',
-    'Baraka Chilrens Home',
-    'Nyeri',
-    500,
-    50000
-  ),
-];
-
 export default function AllRequestsTable() {
+  const { requests } = useSelector((state) => state.allMyRequestsState);
   const dispatch = useDispatch();
 
   const userState = useSelector((state) => state.loginState.user);
@@ -74,6 +51,29 @@ export default function AllRequestsTable() {
   }, []);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  function createData(id, name, title, description, number, location, amount) {
+    return {
+      id,
+      name,
+      title,
+      description,
+      number,
+      location,
+      amount,
+    };
+  }
+
+  const rows = requests.map((request) => {
+    return createData(
+      request.requestid,
+      request.facilityname,
+      request.requesttitle,
+      request.requestdescription,
+      request.numberofchildren,
+      request.location,
+      request.amountrequired
+    );
+  });
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
