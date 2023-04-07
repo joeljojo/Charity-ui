@@ -20,6 +20,10 @@ import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
 import Donors from '../Commons/Donors';
 import AllRequestsTable from '../Commons/AllRequestsTable';
+import MyAdminApprovedRequests from '../Commons/MyAdminApprovedRequests';
+import MyAdminRejectedRequests from '../Commons/MyAdminRejectedRequests';
+import MyDonorApprovedRequests from '../Commons/MyDonorApprovedRequests';
+import MyDonorRejectedRequests from '../Commons/MyDonorRejectedRequests';
 
 const drawerWidth = 240;
 
@@ -115,16 +119,16 @@ export default function ChildrensHome() {
       return <Donors />;
     }
     if (listItem === 'Admin Approved') {
-      return <h1>Admin Approved</h1>;
+      return <MyAdminApprovedRequests />;
     }
     if (listItem === 'Admin Rejected') {
-      return <h1>Admin Rejected</h1>;
+      return <MyAdminRejectedRequests />;
     }
     if (listItem === 'Donor Approved') {
-      return <h1>Donor Approved</h1>;
+      return <MyDonorApprovedRequests />;
     }
     if (listItem === 'Donor Rejected') {
-      return <h1>Donor Rejected</h1>;
+      return <MyDonorRejectedRequests />;
     }
   };
   return (
