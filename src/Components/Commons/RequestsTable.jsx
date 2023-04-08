@@ -28,21 +28,21 @@ const columns = [
   {
     id: 'number',
     label: 'No. of Children',
-    minWidth: 170,
+    minWidth: 120,
   },
   {
     id: 'location',
     label: 'Location',
-    minWidth: 170,
+    minWidth: 120,
   },
 
   {
     id: 'amount',
     label: 'Amount Required',
-    minWidth: 170,
+    minWidth: 120,
   },
-  { id: 'approve', label: 'Approve', minWidth: 170 },
-  { id: 'reject', label: 'Reject', minWidth: 170 },
+  { id: 'approve', label: 'Approve', minWidth: 120 },
+  { id: 'reject', label: 'Reject', minWidth: 120 },
 ];
 
 function createData(id, name, title, description, number, location, amount) {
