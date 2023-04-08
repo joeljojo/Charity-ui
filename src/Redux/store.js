@@ -14,6 +14,8 @@ import {
   myAdminRejectedRequestsReducer,
   myDonorApprovedRequestsReducer,
   myDonorRejectedRequestsReducer,
+  adminRequestsReducer,
+  donorRequestsReducer,
 } from './reducer';
 
 const rootReducer = combineReducers({
@@ -24,6 +26,8 @@ const rootReducer = combineReducers({
   myAdminRejectedRequestsState: myAdminRejectedRequestsReducer,
   myDonorApprovedRequestsState: myDonorApprovedRequestsReducer,
   myDonorRejectedRequestsState: myDonorRejectedRequestsReducer,
+  adminRequestsState: adminRequestsReducer,
+  donorRequestsState: donorRequestsReducer,
 });
 const store = createStore(
   rootReducer,

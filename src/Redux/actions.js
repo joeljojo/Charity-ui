@@ -2,6 +2,8 @@ import Axios from 'axios';
 // import * as actions from './actionTypes';
 import {
   ADD_USER,
+  FETCH_ADMIN_REQUESTS,
+  FETCH_DONOR_REQUESTS,
   FETCH_DONORS,
   FETCH_MY_ADMIN_APPROVED_REQUESTS,
   FETCH_MY_ADMIN_REJECTED_REQUESTS,
@@ -242,6 +244,64 @@ const fetchMyDonorRejectedRequests = (userID) => async (dispatch) => {
     });
   }
 };
+const fetchAdminRequests = (userID) => async (dispatch) => {
+  dispatch({
+    type: FETCH_ADMIN_REQUESTS.REQUEST,
+  });
+  try {
+    // Perform a get request
+    const response = await Axios.get(
+      `${baseUrl}/admin-requests?userID=${userID}`
+    );
+    if (response.data.status) {
+      dispatch({
+        type: FETCH_ADMIN_REQUESTS.SUCCESS,
+        requests: response.data.result,
+        status: response.data.status,
+      });
+    } else {
+      dispatch({
+        type: FETCH_ADMIN_REQUESTS.FAIL,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: FETCH_ADMIN_REQUESTS.FAIL,
+      message: err.message,
+    });
+  }
+};
+const fetchDonorRequests = (userID) => async (dispatch) => {
+  dispatch({
+    type: FETCH_DONOR_REQUESTS.REQUEST,
+  });
+  try {
+    // Perform a get request
+    const response = await Axios.get(
+      `${baseUrl}/donor-requests?userID=${userID}`
+    );
+    if (response.data.status) {
+      dispatch({
+        type: FETCH_DONOR_REQUESTS.SUCCESS,
+        requests: response.data.result,
+        status: response.data.status,
+      });
+    } else {
+      dispatch({
+        type: FETCH_DONOR_REQUESTS.FAIL,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: FETCH_DONOR_REQUESTS.FAIL,
+      message: err.message,
+    });
+  }
+};
 export {
   addUser,
   login,
@@ -251,4 +311,6 @@ export {
   fetchMyAdminRejectedRequests,
   fetchMyDonorApprovedRequests,
   fetchMyDonorRejectedRequests,
+  fetchAdminRequests,
+  fetchDonorRequests,
 };

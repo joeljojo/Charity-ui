@@ -8,6 +8,8 @@ import {
   FETCH_MY_ADMIN_REJECTED_REQUESTS,
   FETCH_MY_DONOR_APPROVED_REQUESTS,
   FETCH_MY_DONOR_REJECTED_REQUESTS,
+  FETCH_ADMIN_REQUESTS,
+  FETCH_DONOR_REQUESTS,
 } from './actionTypes';
 
 const initialUserState = {
@@ -53,6 +55,20 @@ const initialMyDonorApprovedRequestsState = {
   status: false,
 };
 const initialMyDonorRejectedRequestsState = {
+  requests: [],
+  error: null,
+  loading: false,
+  message: '',
+  status: false,
+};
+const initialAdminRequestsState = {
+  requests: [],
+  error: null,
+  loading: false,
+  message: '',
+  status: false,
+};
+const initialDonorRequestsState = {
   requests: [],
   error: null,
   loading: false,
@@ -309,6 +325,80 @@ const myDonorRejectedRequestsReducer = (
       return state;
   }
 };
+const adminRequestsReducer = (
+  state = initialAdminRequestsState,
+  action = {}
+) => {
+  switch (action.type) {
+    case FETCH_ADMIN_REQUESTS.REQUEST:
+      return {
+        ...state,
+        error: '',
+        loading: true,
+        message: '',
+        status: false,
+      };
+
+    case FETCH_ADMIN_REQUESTS.SUCCESS:
+      return {
+        ...state,
+        requests: action.requests,
+        loading: false,
+        error: '',
+        message: action.message,
+        status: action.status,
+      };
+    case FETCH_ADMIN_REQUESTS.FAIL:
+      return {
+        ...state,
+        requests: [],
+        loading: false,
+        error: action.error,
+        message: action.message,
+        status: false,
+      };
+
+    default:
+      return state;
+  }
+};
+const donorRequestsReducer = (
+  state = initialDonorRequestsState,
+  action = {}
+) => {
+  switch (action.type) {
+    case FETCH_DONOR_REQUESTS.REQUEST:
+      return {
+        ...state,
+        error: '',
+        loading: true,
+        message: '',
+        status: false,
+      };
+
+    case FETCH_DONOR_REQUESTS.SUCCESS:
+      return {
+        ...state,
+        requests: action.requests,
+        loading: false,
+        error: '',
+        message: action.message,
+        status: action.status,
+      };
+    case FETCH_DONOR_REQUESTS.FAIL:
+      return {
+        ...state,
+        requests: [],
+        loading: false,
+        error: action.error,
+        message: action.message,
+        status: false,
+      };
+
+    default:
+      return state;
+  }
+};
 
 export {
   loginReducer,
@@ -318,4 +408,6 @@ export {
   myAdminRejectedRequestsReducer,
   myDonorApprovedRequestsReducer,
   myDonorRejectedRequestsReducer,
+  adminRequestsReducer,
+  donorRequestsReducer,
 };
