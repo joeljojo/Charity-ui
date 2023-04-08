@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllMyRequests } from '../../Redux/actions';
+import { fetchMyDonorRejectedRequests } from '../../Redux/actions';
 
 const columns = [
   { id: 'id', label: 'Id', minWidth: 170 },
@@ -41,13 +41,15 @@ const columns = [
   },
 ];
 export default function MyDonorRejectedRequests() {
-  const { requests } = useSelector((state) => state.allMyRequestsState);
+  const { requests } = useSelector(
+    (state) => state.myDonorRejectedRequestsState
+  );
   const dispatch = useDispatch();
 
   const userState = useSelector((state) => state.loginState.user);
   const { userID } = userState;
   React.useEffect(() => {
-    dispatch(fetchAllMyRequests(userID));
+    dispatch(fetchMyDonorRejectedRequests(userID));
   }, []);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
