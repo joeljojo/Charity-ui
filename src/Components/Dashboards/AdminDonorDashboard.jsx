@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -16,6 +17,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import { useNavigate } from 'react-router-dom';
+import RequestsTable from '../Commons/RequestsTable';
 
 const drawerWidth = 240;
 
@@ -85,8 +88,10 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function AdminDonorDashboard() {
+  const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [listItem, setListItem] = React.useState(null);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -95,7 +100,23 @@ export default function AdminDonorDashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  const handleOnclick = (text) => {
+    setListItem(text);
+  };
+  const loadDrawerHeader = () => {
+    if (listItem === 'Home') {
+      return navigate('/');
+    }
+    if (listItem === 'Requets') {
+      return <RequestsTable />;
+    }
+    if (listItem === 'Approved Requests') {
+      return <h1>Approved Requests</h1>;
+    }
+    if (listItem === 'Rejected Requests') {
+      return <h1>Rejected Requests</h1>;
+    }
+  };
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -130,7 +151,7 @@ export default function AdminDonorDashboard() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Home', 'Requests', 'Approved Requests', 'Rejected Requests'].map(
+          {['Home', 'Requets', 'Approved Requests', 'Rejected Requests'].map(
             (text) => (
               <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                 <ListItemButton
@@ -147,7 +168,11 @@ export default function AdminDonorDashboard() {
                       justifyContent: 'center',
                     }}
                   />
-                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                  <ListItemText
+                    onClick={() => handleOnclick(text)}
+                    primary={text}
+                    sx={{ opacity: open ? 1 : 0 }}
+                  />
                 </ListItemButton>
               </ListItem>
             )
@@ -179,7 +204,7 @@ export default function AdminDonorDashboard() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {/* Load Components here */}
+        {loadDrawerHeader()}
       </Box>
     </Box>
   );
