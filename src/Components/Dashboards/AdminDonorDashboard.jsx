@@ -19,6 +19,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
 import RequestsTable from '../Commons/RequestsTable';
+import ApprovedRequests from '../Commons/ApprovedRequests';
+import RejectedRequests from '../Commons/RejectedRequests';
 
 const drawerWidth = 240;
 
@@ -111,10 +113,10 @@ export default function AdminDonorDashboard() {
       return <RequestsTable />;
     }
     if (listItem === 'Approved Requests') {
-      return <h1>Approved Requests</h1>;
+      return <ApprovedRequests />;
     }
     if (listItem === 'Rejected Requests') {
-      return <h1>Rejected Requests</h1>;
+      return <RejectedRequests />;
     }
   };
   return (
