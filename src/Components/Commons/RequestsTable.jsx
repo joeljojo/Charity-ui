@@ -7,11 +7,18 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { useDispatch, useSelector } from 'react-redux';
 import ApproveButton from './ApproveButton';
 import RejectButton from './RejectButton';
+import { fetchAdminRequests, fetchDonorRequests } from '../../Redux/actions';
 
 const columns = [
   { id: 'id', label: 'Id', minWidth: 170 },
+  {
+    id: 'name',
+    label: ' Facility Name',
+    minWidth: 170,
+  },
   { id: 'title', label: 'Title', minWidth: 100 },
   {
     id: 'description',
@@ -19,8 +26,8 @@ const columns = [
     minWidth: 170,
   },
   {
-    id: 'name',
-    label: ' Name',
+    id: 'number',
+    label: 'No. of Children',
     minWidth: 170,
   },
   {
@@ -28,11 +35,7 @@ const columns = [
     label: 'Location',
     minWidth: 170,
   },
-  {
-    id: 'number',
-    label: 'Children',
-    minWidth: 170,
-  },
+
   {
     id: 'amount',
     label: 'Amount Required',
@@ -42,37 +45,61 @@ const columns = [
   { id: 'reject', label: 'Reject', minWidth: 170 },
 ];
 
-function createData(id, title, description, name, location, number, amount) {
+function createData(id, name, title, description, number, location, amount) {
   const approve = <ApproveButton />;
   const reject = <RejectButton />;
   return {
     id,
+    name,
     title,
     description,
-    name,
-    location,
     number,
+    location,
     amount,
     approve,
     reject,
   };
 }
-
-const rows = [
-  createData(
-    '14ae8834-2cf5-4a2b-844a-3e203b593225',
-    'Classes',
-    'Ongoing students do not have enough space to study',
-    'Baraka Chilrens Home',
-    'Nyeri',
-    500,
-    50000
-  ),
-];
-
 export default function RequestsTable() {
+  const userState = useSelector((state) => state.loginState.user);
+  const { userID, isDonor, isAdmin } = userState;
+  const adminRequests = useSelector((state) => state.adminRequestsState);
+  const donorRequests = useSelector((state) => state.donorRequestsState);
+  const dispatch = useDispatch();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  // Return State based on the user
+  const getRequests = () => {
+    let requestsState = {};
+    if (isDonor) {
+      requestsState = donorRequests;
+    }
+    if (isAdmin) {
+      requestsState = adminRequests;
+    }
+    return requestsState;
+  };
+  const { requests } = getRequests();
+  React.useEffect(() => {
+    if (isAdmin) {
+      dispatch(fetchAdminRequests());
+    }
+    if (isDonor) {
+      dispatch(fetchDonorRequests(userID));
+    }
+  }, []);
+
+  const rows = requests.map((request) => {
+    return createData(
+      request.requestid,
+      request.facilityname,
+      request.requesttitle,
+      request.requestdescription,
+      request.numberofchildren,
+      request.location,
+      request.amountrequired
+    );
+  });
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

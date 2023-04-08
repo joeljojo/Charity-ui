@@ -244,15 +244,13 @@ const fetchMyDonorRejectedRequests = (userID) => async (dispatch) => {
     });
   }
 };
-const fetchAdminRequests = (userID) => async (dispatch) => {
+const fetchAdminRequests = () => async (dispatch) => {
   dispatch({
     type: FETCH_ADMIN_REQUESTS.REQUEST,
   });
   try {
     // Perform a get request
-    const response = await Axios.get(
-      `${baseUrl}/admin-requests?userID=${userID}`
-    );
+    const response = await Axios.get(`${baseUrl}/admin-requests`);
     if (response.data.status) {
       dispatch({
         type: FETCH_ADMIN_REQUESTS.SUCCESS,
