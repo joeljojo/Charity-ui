@@ -6,6 +6,7 @@ import SignUp from './Components/Register/SignUp';
 import AdminDonorDashboard from './Components/Dashboards/AdminDonorDashboard';
 import ChildrensHome from './Components/Dashboards/ChildrensHome';
 import Home from './Components/Home/Home';
+import MakeRequest from './Components/MakeRequest/MakeRequest';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="signup" Component={SignUp} />
         <Route path="userdashboard" Component={ChildrensHome} />
         <Route path="admindonordashboard" Component={AdminDonorDashboard} />
+        <Route path="make-request" Component={MakeRequest} />
       </Routes>
     </div>
   );

@@ -19,8 +19,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
 import RequestsTable from '../Commons/RequestsTable';
-import ApprovedRequests from '../Commons/ApprovedRequests';
-import RejectedRequests from '../Commons/RejectedRequests';
 
 const drawerWidth = 240;
 
@@ -112,12 +110,6 @@ export default function AdminDonorDashboard() {
     if (listItem === 'Requets') {
       return <RequestsTable />;
     }
-    if (listItem === 'Approved Requests') {
-      return <ApprovedRequests />;
-    }
-    if (listItem === 'Rejected Requests') {
-      return <RejectedRequests />;
-    }
   };
   return (
     <Box sx={{ display: 'flex' }}>
@@ -153,32 +145,30 @@ export default function AdminDonorDashboard() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Home', 'Requets', 'Approved Requests', 'Rejected Requests'].map(
-            (text) => (
-              <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                <ListItemButton
+          {['Home', 'Requets'].map((text) => (
+            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
                   sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
                   }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  />
-                  <ListItemText
-                    onClick={() => handleOnclick(text)}
-                    primary={text}
-                    sx={{ opacity: open ? 1 : 0 }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            )
-          )}
+                />
+                <ListItemText
+                  onClick={() => handleOnclick(text)}
+                  primary={text}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
         <Divider />
         <List>
