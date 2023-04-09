@@ -16,6 +16,12 @@ import {
   myDonorRejectedRequestsReducer,
   adminRequestsReducer,
   donorRequestsReducer,
+  addUserReducer,
+  makeRequestReducer,
+  adminApprovesRequestReducer,
+  adminRejectsRequestReducer,
+  donorApprovesRequestReducer,
+  donorRejectsRequestReducer,
 } from './reducer';
 
 const rootReducer = combineReducers({
@@ -28,6 +34,12 @@ const rootReducer = combineReducers({
   myDonorRejectedRequestsState: myDonorRejectedRequestsReducer,
   adminRequestsState: adminRequestsReducer,
   donorRequestsState: donorRequestsReducer,
+  addUserState: addUserReducer,
+  makeRequestState: makeRequestReducer,
+  adminApprovesRequestState: adminApprovesRequestReducer,
+  adminRejectsRequestState: adminRejectsRequestReducer,
+  donorApprovesRequestSate: donorApprovesRequestReducer,
+  donorRejectsRequestSate: donorRejectsRequestReducer,
 });
 const store = createStore(
   rootReducer,
