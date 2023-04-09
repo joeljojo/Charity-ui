@@ -10,10 +10,52 @@ import {
   FETCH_MY_DONOR_REJECTED_REQUESTS,
   FETCH_ADMIN_REQUESTS,
   FETCH_DONOR_REQUESTS,
+  ADD_USER,
+  MAKE_REQUEST,
+  ADMIN_APPROVES_REQUEST,
+  ADMIN_REJECTS_REQUEST,
+  DONOR_APPROVES_REQUEST,
+  DONOR_REJECTS_REQUEST,
 } from './actionTypes';
 
 const initialUserState = {
   user: {},
+  error: null,
+  loading: false,
+  message: '',
+  status: false,
+};
+const initialAddUserState = {
+  error: null,
+  loading: false,
+  message: '',
+  status: false,
+};
+const initialMakeRequestState = {
+  error: null,
+  loading: false,
+  message: '',
+  status: false,
+};
+const initialAdminApprovesRequestState = {
+  error: null,
+  loading: false,
+  message: '',
+  status: false,
+};
+const initialAdminRejectsRequestState = {
+  error: null,
+  loading: false,
+  message: '',
+  status: false,
+};
+const initialDonorApprovesRequetState = {
+  error: null,
+  loading: false,
+  message: '',
+  status: false,
+};
+const initialDonorRejetctsRequestState = {
   error: null,
   loading: false,
   message: '',
@@ -399,6 +441,210 @@ const donorRequestsReducer = (
       return state;
   }
 };
+const addUserReducer = (state = initialAddUserState, action = {}) => {
+  switch (action.type) {
+    case ADD_USER.REQUEST:
+      return {
+        ...state,
+        error: '',
+        loading: true,
+        message: '',
+        status: false,
+      };
+
+    case ADD_USER.SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        message: action.message,
+        status: action.status,
+      };
+    case ADD_USER.FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+        message: action.message,
+        status: false,
+      };
+
+    default:
+      return state;
+  }
+};
+const makeRequestReducer = (state = initialMakeRequestState, action = {}) => {
+  switch (action.type) {
+    case MAKE_REQUEST.REQUEST:
+      return {
+        ...state,
+        error: '',
+        loading: true,
+        message: '',
+        status: false,
+      };
+
+    case MAKE_REQUEST.SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        message: action.message,
+        status: action.status,
+      };
+    case MAKE_REQUEST.FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+        message: action.message,
+        status: false,
+      };
+
+    default:
+      return state;
+  }
+};
+const adminApprovesRequestReducer = (
+  state = initialAdminApprovesRequestState,
+  action = {}
+) => {
+  switch (action.type) {
+    case ADMIN_APPROVES_REQUEST.REQUEST:
+      return {
+        ...state,
+        error: '',
+        loading: true,
+        message: '',
+        status: false,
+      };
+
+    case ADMIN_APPROVES_REQUEST.SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        message: action.message,
+        status: action.status,
+      };
+    case ADMIN_APPROVES_REQUEST.FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+        message: action.message,
+        status: false,
+      };
+
+    default:
+      return state;
+  }
+};
+const adminRejectsRequestReducer = (
+  state = initialAdminRejectsRequestState,
+  action = {}
+) => {
+  switch (action.type) {
+    case ADMIN_REJECTS_REQUEST.REQUEST:
+      return {
+        ...state,
+        error: '',
+        loading: true,
+        message: '',
+        status: false,
+      };
+
+    case ADMIN_REJECTS_REQUEST.SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        message: action.message,
+        status: action.status,
+      };
+    case ADMIN_REJECTS_REQUEST.FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+        message: action.message,
+        status: false,
+      };
+
+    default:
+      return state;
+  }
+};
+const donorApprovesRequestReducer = (
+  state = initialDonorApprovesRequetState,
+  action = {}
+) => {
+  switch (action.type) {
+    case DONOR_APPROVES_REQUEST.REQUEST:
+      return {
+        ...state,
+        error: '',
+        loading: true,
+        message: '',
+        status: false,
+      };
+
+    case DONOR_APPROVES_REQUEST.SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        message: action.message,
+        status: action.status,
+      };
+    case DONOR_APPROVES_REQUEST.FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+        message: action.message,
+        status: false,
+      };
+
+    default:
+      return state;
+  }
+};
+const donorRejectsRequestReducer = (
+  state = initialDonorRejetctsRequestState,
+  action = {}
+) => {
+  switch (action.type) {
+    case DONOR_REJECTS_REQUEST.REQUEST:
+      return {
+        ...state,
+        error: '',
+        loading: true,
+        message: '',
+        status: false,
+      };
+
+    case DONOR_REJECTS_REQUEST.SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        message: action.message,
+        status: action.status,
+      };
+    case DONOR_REJECTS_REQUEST.FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+        message: action.message,
+        status: false,
+      };
+
+    default:
+      return state;
+  }
+};
 
 export {
   loginReducer,
@@ -410,4 +656,10 @@ export {
   myDonorRejectedRequestsReducer,
   adminRequestsReducer,
   donorRequestsReducer,
+  addUserReducer,
+  makeRequestReducer,
+  adminApprovesRequestReducer,
+  adminRejectsRequestReducer,
+  donorApprovesRequestReducer,
+  donorRejectsRequestReducer,
 };

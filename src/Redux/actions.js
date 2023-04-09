@@ -2,6 +2,10 @@ import Axios from 'axios';
 // import * as actions from './actionTypes';
 import {
   ADD_USER,
+  ADMIN_APPROVES_REQUEST,
+  ADMIN_REJECTS_REQUEST,
+  DONOR_APPROVES_REQUEST,
+  DONOR_REJECTS_REQUEST,
   FETCH_ADMIN_REQUESTS,
   FETCH_DONOR_REQUESTS,
   FETCH_DONORS,
@@ -331,6 +335,127 @@ const makeRequests = (requestsData) => async (dispatch) => {
     });
   }
 };
+const adminApprovesRequest = (requestsId) => async (dispatch) => {
+  dispatch({
+    type: ADMIN_APPROVES_REQUEST.REQUEST,
+  });
+  try {
+    // Perform a get request
+    const response = await Axios.put(
+      `${baseUrl}/admin-approve-request`,
+      requestsId
+    );
+    if (response.data.status) {
+      dispatch({
+        type: ADMIN_APPROVES_REQUEST.SUCCESS,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    } else {
+      dispatch({
+        type: ADMIN_APPROVES_REQUEST.FAIL,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: ADMIN_APPROVES_REQUEST.FAIL,
+      message: err.message,
+    });
+  }
+};
+const adminRejectsRequest = (requestId) => async (dispatch) => {
+  dispatch({
+    type: ADMIN_REJECTS_REQUEST.REQUEST,
+  });
+  try {
+    // Perform a get request
+    const response = await Axios.put(
+      `${baseUrl}/admin-reject-request`,
+      requestId
+    );
+    if (response.data.status) {
+      dispatch({
+        type: ADMIN_REJECTS_REQUEST.SUCCESS,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    } else {
+      dispatch({
+        type: ADMIN_REJECTS_REQUEST.FAIL,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: ADMIN_REJECTS_REQUEST.FAIL,
+      message: err.message,
+    });
+  }
+};
+const donorApprovesrequest = (requestId) => async (dispatch) => {
+  dispatch({
+    type: DONOR_APPROVES_REQUEST.REQUEST,
+  });
+  try {
+    // Perform a get request
+    const response = await Axios.put(
+      `${baseUrl}/donor-approve-request`,
+      requestId
+    );
+    if (response.data.status) {
+      dispatch({
+        type: DONOR_APPROVES_REQUEST.SUCCESS,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    } else {
+      dispatch({
+        type: DONOR_APPROVES_REQUEST.FAIL,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: DONOR_APPROVES_REQUEST.FAIL,
+      message: err.message,
+    });
+  }
+};
+const donorRejectsRequet = (requestId) => async (dispatch) => {
+  dispatch({
+    type: DONOR_REJECTS_REQUEST.REQUEST,
+  });
+  try {
+    // Perform a get request
+    const response = await Axios.post(
+      `${baseUrl}/donor-reject-request`,
+      requestId
+    );
+    if (response.data.status) {
+      dispatch({
+        type: DONOR_REJECTS_REQUEST.SUCCESS,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    } else {
+      dispatch({
+        type: DONOR_REJECTS_REQUEST.FAIL,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: DONOR_REJECTS_REQUEST.FAIL,
+      message: err.message,
+    });
+  }
+};
+
 export {
   addUser,
   login,
@@ -343,4 +468,8 @@ export {
   fetchAdminRequests,
   fetchDonorRequests,
   makeRequests,
+  adminApprovesRequest,
+  adminRejectsRequest,
+  donorApprovesrequest,
+  donorRejectsRequet,
 };

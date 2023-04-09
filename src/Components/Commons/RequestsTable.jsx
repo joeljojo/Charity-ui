@@ -46,8 +46,8 @@ const columns = [
 ];
 
 function createData(id, name, title, description, number, location, amount) {
-  const approve = <ApproveButton />;
-  const reject = <RejectButton />;
+  const approve = <ApproveButton id={id} />;
+  const reject = <RejectButton id={id} />;
   return {
     id,
     name,
