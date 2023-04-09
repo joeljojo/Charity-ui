@@ -1,12 +1,22 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import { useSelector, useDispatch } from 'react-redux';
+import { adminRejectsRequest, donorRejectsRequest } from '../../Redux/actions';
 
 export default function RejectButton(props) {
+  const dispatch = useDispatch();
+  const { isDonor, isAdmin } = useSelector((state) => state.loginState.user);
   const handleRejectRequest = () => {
     const data = props;
     const { id } = data;
-    console.log(id);
-    alert(`Clicked Reject Request${id}`);
+    React.useEffect(() => {
+      if (isAdmin) {
+        dispatch(adminRejectsRequest(id));
+      }
+      if (isDonor) {
+        dispatch(donorRejectsRequest(id));
+      }
+    }, []);
   };
   return (
     <Button variant="text" onClick={handleRejectRequest}>

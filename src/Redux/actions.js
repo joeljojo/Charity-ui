@@ -395,7 +395,7 @@ const adminRejectsRequest = (requestId) => async (dispatch) => {
     });
   }
 };
-const donorApprovesrequest = (requestId) => async (dispatch) => {
+const donorApprovesRequest = (requestId) => async (dispatch) => {
   dispatch({
     type: DONOR_APPROVES_REQUEST.REQUEST,
   });
@@ -425,13 +425,13 @@ const donorApprovesrequest = (requestId) => async (dispatch) => {
     });
   }
 };
-const donorRejectsRequet = (requestId) => async (dispatch) => {
+const donorRejectsRequest = (requestId) => async (dispatch) => {
   dispatch({
     type: DONOR_REJECTS_REQUEST.REQUEST,
   });
   try {
     // Perform a get request
-    const response = await Axios.post(
+    const response = await Axios.put(
       `${baseUrl}/donor-reject-request`,
       requestId
     );
@@ -470,6 +470,6 @@ export {
   makeRequests,
   adminApprovesRequest,
   adminRejectsRequest,
-  donorApprovesrequest,
-  donorRejectsRequet,
+  donorApprovesRequest,
+  donorRejectsRequest,
 };
