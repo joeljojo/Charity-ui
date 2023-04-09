@@ -5,19 +5,24 @@ import {
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
-  Link,
   Paper,
   Box,
   Grid,
   Typography,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { makeRequests } from '../../Redux/actions';
 
 const theme = createTheme();
 
 export default function MakeRequest() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  const { donorId, userid } = location.state.data;
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -32,6 +37,10 @@ export default function MakeRequest() {
       childrensHomeId: data.get('userID'),
       donorId: data.get('donorID'),
     };
+    dispatch(makeRequests(requestData));
+    setTimeout(() => {
+      navigate('/userdashboard');
+    }, 1000);
   };
 
   return (
@@ -140,6 +149,7 @@ export default function MakeRequest() {
                 label="User ID"
                 name="userID"
                 autoComplete="userID"
+                value={userid}
                 autoFocus
               />
               <TextField
@@ -150,11 +160,8 @@ export default function MakeRequest() {
                 label="Donor ID"
                 name="donorID"
                 autoComplete="donorID"
+                value={donorId}
                 autoFocus
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
               />
               <Button
                 type="submit"
@@ -162,20 +169,8 @@ export default function MakeRequest() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Make Request
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#jj" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="/signup" variant="body2">
-                    Don&#39;t have an account? Sign Up
-                  </Link>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
         </Grid>

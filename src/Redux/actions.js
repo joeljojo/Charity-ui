@@ -11,6 +11,7 @@ import {
   FETCH_MY_DONOR_REJECTED_REQUESTS,
   FETCH_REQUESTS,
   LOGIN,
+  MAKE_REQUEST,
 } from './actionTypes';
 import { baseUrl } from './Services/config';
 
@@ -300,6 +301,36 @@ const fetchDonorRequests = (userID) => async (dispatch) => {
     });
   }
 };
+const makeRequests = (requestsData) => async (dispatch) => {
+  dispatch({
+    type: MAKE_REQUEST.REQUEST,
+  });
+  try {
+    // Perform a get request
+    const response = await Axios.post(
+      `${baseUrl}/children-home-request`,
+      requestsData
+    );
+    if (response.data.status) {
+      dispatch({
+        type: MAKE_REQUEST.SUCCESS,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    } else {
+      dispatch({
+        type: MAKE_REQUEST.FAIL,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: MAKE_REQUEST.FAIL,
+      message: err.message,
+    });
+  }
+};
 export {
   addUser,
   login,
@@ -311,4 +342,5 @@ export {
   fetchMyDonorRejectedRequests,
   fetchAdminRequests,
   fetchDonorRequests,
+  makeRequests,
 };
