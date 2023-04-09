@@ -28,12 +28,13 @@ const columns = [
 ];
 export default function Donors() {
   const { donors } = useSelector((state) => state.getDonorsState);
+  const { userID } = useSelector((state) => state.loginState.user);
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(fetchDonors());
   }, []);
   function createData(id, firstname, lastname, email) {
-    const request = <RequestButton />;
+    const request = <RequestButton donorId={id} userid={userID} />;
     return {
       id,
       firstname,

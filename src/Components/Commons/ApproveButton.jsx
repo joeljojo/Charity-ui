@@ -2,5 +2,12 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 
 export default function ApproveButton() {
-  return <Button variant="text">Approve</Button>;
+  const handleApproveRequest = () => {
+    alert('Clicked Approve Request');
+  };
+  return (
+    <Button variant="text" onClick={handleApproveRequest}>
+      Approve
+    </Button>
+  );
 }
