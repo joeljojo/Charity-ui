@@ -11,18 +11,21 @@ import {
   Typography,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { makePayment } from '../../Redux/actions';
 
 const theme = createTheme();
 
 export default function Payout() {
+  const dispatch = useDispatch();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-unused-vars
-    const userData = {
-      PartyA: data.get('phoneNumber'),
+    const payData = {
+      phone: data.get('phoneNumber'),
       Amount: data.get('amount'),
     };
+    dispatch(makePayment(payData));
   };
 
   return (

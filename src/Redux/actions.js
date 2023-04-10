@@ -15,6 +15,7 @@ import {
   FETCH_MY_DONOR_REJECTED_REQUESTS,
   FETCH_REQUESTS,
   LOGIN,
+  MAKE_PAYMENT,
   MAKE_REQUEST,
 } from './actionTypes';
 import { baseUrl } from './Services/config';
@@ -455,6 +456,36 @@ const donorRejectsRequest = (requestId) => async (dispatch) => {
     });
   }
 };
+const makePayment = (payData) => async (dispatch) => {
+  dispatch({
+    type: MAKE_PAYMENT.REQUEST,
+  });
+  console.log(payData);
+  try {
+    // Perform a post request
+    const response = await Axios.post(`${baseUrl}/lipa-na-mpesa`, payData);
+    if (response.data.success) {
+      dispatch({
+        type: MAKE_PAYMENT.SUCCESS,
+        success: response.data.success,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    } else {
+      dispatch({
+        type: MAKE_PAYMENT.FAIL,
+        success: response.data.success,
+        message: response.data.message,
+        status: response.data.status,
+      });
+    }
+  } catch (err) {
+    dispatch({
+      type: MAKE_PAYMENT.FAIL,
+      message: err.message,
+    });
+  }
+};
 
 export {
   addUser,
@@ -472,4 +503,5 @@ export {
   adminRejectsRequest,
   donorApprovesRequest,
   donorRejectsRequest,
+  makePayment,
 };
