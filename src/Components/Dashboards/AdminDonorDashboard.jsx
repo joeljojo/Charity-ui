@@ -110,6 +110,9 @@ export default function AdminDonorDashboard() {
     if (listItem === 'Requets') {
       return <RequestsTable />;
     }
+    if (listItem === 'Log Out') {
+      return navigate('/');
+    }
   };
   return (
     <Box sx={{ display: 'flex' }}>
@@ -172,7 +175,7 @@ export default function AdminDonorDashboard() {
         </List>
         <Divider />
         <List>
-          {['Help', 'Log Out'].map((text) => (
+          {['Log Out'].map((text) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -188,7 +191,11 @@ export default function AdminDonorDashboard() {
                     justifyContent: 'center',
                   }}
                 />
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  onClick={() => handleOnclick(text)}
+                  primary={text}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </ListItem>
           ))}

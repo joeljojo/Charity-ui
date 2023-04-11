@@ -16,17 +16,27 @@ import {
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addUser } from '../../Redux/actions';
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const addUserState = useSelector((state) => state.addUserState);
+  const { message, status } = addUserState;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [value, setValue] = React.useState('childrenshome');
   const handleChange = (e) => {
     setValue(e.target.value);
   };
+  if (status === true) {
+    setTimeout(() => {
+      navigate('/signin');
+    }, 2000);
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -58,6 +68,9 @@ export default function SignUp() {
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
+          </Typography>
+          <Typography mt={2} component="p" sx={{ color: 'red' }}>
+            {message}
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>

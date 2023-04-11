@@ -130,6 +130,9 @@ export default function ChildrensHome() {
     if (listItem === 'Donor Rejected') {
       return <MyDonorRejectedRequests />;
     }
+    if (listItem === 'Log Out') {
+      navigate('/');
+    }
   };
   return (
     <Box sx={{ display: 'flex' }}>
@@ -200,7 +203,7 @@ export default function ChildrensHome() {
         </List>
         <Divider />
         <List>
-          {['Help', 'Log Out'].map((text) => (
+          {['Log Out'].map((text) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -216,7 +219,11 @@ export default function ChildrensHome() {
                     justifyContent: 'center',
                   }}
                 />
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  onClick={() => handleOnclick(text)}
+                  primary={text}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </ListItem>
           ))}

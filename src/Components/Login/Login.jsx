@@ -29,7 +29,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user } = userState;
+  const { user, message } = userState;
   const childresHome = user.isChildrensHome;
   if (childresHome !== undefined && childresHome === true) {
     setTimeout(() => {
@@ -87,6 +87,9 @@ export default function Login() {
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
+            </Typography>
+            <Typography mt={2} component="p" sx={{ color: 'red' }}>
+              {message}
             </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
