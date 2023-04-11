@@ -67,7 +67,7 @@ export default function Home() {
           </Box>
         </Box>
       </Grid>
-      <Grid sx={{ backgroundColor: '#f8f5f0' }}>
+      <Grid>
         <Grid sx={{ display: 'flex', justifyContent: 'center' }}>
           <Typography
             variant="h4"
