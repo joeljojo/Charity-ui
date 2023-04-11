@@ -460,7 +460,6 @@ const makePayment = (payData) => async (dispatch) => {
   dispatch({
     type: MAKE_PAYMENT.REQUEST,
   });
-  console.log(payData);
   try {
     // Perform a post request
     const response = await Axios.post(`${baseUrl}/lipa-na-mpesa`, payData);

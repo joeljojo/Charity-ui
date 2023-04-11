@@ -34,7 +34,7 @@ export default function SignUp() {
   if (status === true) {
     setTimeout(() => {
       navigate('/signin');
-    }, 2000);
+    }, 3000);
   }
 
   const handleSubmit = (event) => {
@@ -66,7 +66,7 @@ export default function SignUp() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color="#f98908">
             Sign up
           </Typography>
           <Typography mt={2} component="p" sx={{ color: 'red' }}>
@@ -137,7 +137,13 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                '&:hover': {
+                  backgroundColor: '#f98908',
+                },
+              }}
             >
               Sign Up
             </Button>
@@ -145,7 +151,17 @@ export default function SignUp() {
               <Grid item>
                 {' '}
                 Already have an account?
-                <Link sx={{ px: 2 }} href="/signin" variant="body2">
+                <Link
+                  sx={{
+                    px: 2,
+                    '&:hover': {
+                      textDecoration: 'none',
+                      color: '#f98908',
+                    },
+                  }}
+                  href="/signin"
+                  variant="body2"
+                >
                   Sign in
                 </Link>
               </Grid>

@@ -9,14 +9,13 @@ export default function RejectButton(props) {
   const handleRejectRequest = () => {
     const data = props;
     const { id } = data;
-    React.useEffect(() => {
-      if (isAdmin) {
+          if (isAdmin) {
         dispatch(adminRejectsRequest(id));
       }
       if (isDonor) {
         dispatch(donorRejectsRequest(id));
       }
-    }, []);
+
   };
   return (
     <Button variant="text" onClick={handleRejectRequest}>

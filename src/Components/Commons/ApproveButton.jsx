@@ -14,7 +14,7 @@ export default function ApproveButton(props) {
   const handleApproveRequest = () => {
     const data = props;
     const { id } = data;
-    React.useEffect(() => {
+    
       if (isAdmin) {
         dispatch(adminApprovesRequest(id));
       }
@@ -24,7 +24,7 @@ export default function ApproveButton(props) {
           navigate('/checkout');
         }, 1000);
       }
-    }, []);
+  
   };
   return (
     <Button variant="text" onClick={handleApproveRequest}>

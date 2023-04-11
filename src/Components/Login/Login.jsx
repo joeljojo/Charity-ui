@@ -85,7 +85,7 @@ export default function Login() {
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" color="#f98908">
               Sign in
             </Typography>
             <Typography mt={2} component="p" sx={{ color: 'red' }}>
@@ -120,19 +120,44 @@ export default function Login() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  '&:hover': {
+                    backgroundColor: '#f98908',
+                  },
+                }}
               >
                 Sign In
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#jj" variant="body2">
+                  <Link
+                    href="#jj"
+                    variant="body2"
+                    sx={{
+                      '&:hover': {
+                        textDecoration: 'none',
+                        color: '#f98908',
+                      },
+                    }}
+                  >
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/signup" variant="body2">
-                    Don&#39;t have an account? Sign Up
+                  Don&#39;t have an account?
+                  <Link
+                    href="/signup"
+                    variant="body2"
+                    sx={{
+                      '&:hover': {
+                        textDecoration: 'none',
+                        color: '#f98908',
+                      },
+                    }}
+                  >
+                    Sign Up
                   </Link>
                 </Grid>
               </Grid>
