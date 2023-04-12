@@ -8,6 +8,7 @@ import ChildrensHome from './Components/Dashboards/ChildrensHome';
 import Home from './Components/Home/Home';
 import MakeRequest from './Components/MakeRequest/MakeRequest';
 import Payout from './Components/MakePayment/Payout';
+import NotFound from './Components/NotFound/NotFound';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="admindonordashboard" Component={AdminDonorDashboard} />
         <Route path="make-request" Component={MakeRequest} />
         <Route path="checkout" Component={Payout} />
+        <Route path="*" Component={NotFound} />
       </Routes>
     </div>
   );
