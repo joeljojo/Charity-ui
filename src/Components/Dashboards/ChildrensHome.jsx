@@ -18,12 +18,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Donors from '../Commons/Donors';
 import AllRequestsTable from '../Commons/AllRequestsTable';
 import MyAdminApprovedRequests from '../Commons/MyAdminApprovedRequests';
 import MyAdminRejectedRequests from '../Commons/MyAdminRejectedRequests';
 import MyDonorApprovedRequests from '../Commons/MyDonorApprovedRequests';
 import MyDonorRejectedRequests from '../Commons/MyDonorRejectedRequests';
+import { logOut } from '../../Redux/actions';
 
 const drawerWidth = 240;
 
@@ -94,6 +96,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function ChildrensHome() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [listItem, setListItem] = React.useState(null);
@@ -131,6 +134,7 @@ export default function ChildrensHome() {
       return <MyDonorRejectedRequests />;
     }
     if (listItem === 'Log Out') {
+      dispatch(logOut());
       navigate('/');
     }
   };

@@ -18,7 +18,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import RequestsTable from '../Commons/RequestsTable';
+import { logOut } from '../../Redux/actions';
 
 const drawerWidth = 240;
 
@@ -89,6 +91,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function AdminDonorDashboard() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [listItem, setListItem] = React.useState(null);
@@ -111,6 +114,7 @@ export default function AdminDonorDashboard() {
       return <RequestsTable />;
     }
     if (listItem === 'Log Out') {
+      dispatch(logOut());
       return navigate('/');
     }
   };

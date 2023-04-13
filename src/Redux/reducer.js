@@ -16,6 +16,7 @@ import {
   ADMIN_REJECTS_REQUEST,
   DONOR_APPROVES_REQUEST,
   DONOR_REJECTS_REQUEST,
+  LOG_OUT,
 } from './actionTypes';
 
 const initialUserState = {
@@ -645,6 +646,17 @@ const donorRejectsRequestReducer = (
       return state;
   }
 };
+const logOutReducer = (state = initialUserState, action = {}) => {
+  switch (action.type) {
+    case LOG_OUT:
+      return {
+        ...state,
+        initialUserState,
+      };
+    default:
+      return state;
+  }
+};
 
 export {
   loginReducer,
@@ -662,4 +674,5 @@ export {
   adminRejectsRequestReducer,
   donorApprovesRequestReducer,
   donorRejectsRequestReducer,
+  logOutReducer,
 };

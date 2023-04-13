@@ -17,6 +17,7 @@ import {
   LOGIN,
   MAKE_PAYMENT,
   MAKE_REQUEST,
+  LOG_OUT,
 } from './actionTypes';
 import { baseUrl } from './Services/config';
 
@@ -485,6 +486,11 @@ const makePayment = (payData) => async (dispatch) => {
     });
   }
 };
+const logOut = () => async (dispatch) => {
+  dispatch({
+    type: LOG_OUT,
+  });
+};
 
 export {
   addUser,
@@ -503,4 +509,5 @@ export {
   donorApprovesRequest,
   donorRejectsRequest,
   makePayment,
+  logOut,
 };
