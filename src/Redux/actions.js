@@ -486,11 +486,9 @@ const makePayment = (payData) => async (dispatch) => {
     });
   }
 };
-const logOut = () => async (dispatch) => {
-  dispatch({
-    type: LOG_OUT,
-  });
-};
+const logOut = () => ({
+  type: LOG_OUT,
+});
 
 export {
   addUser,

@@ -22,6 +22,7 @@ import {
 const initialUserState = {
   user: {},
   error: null,
+  isLoggedIn: false,
   loading: false,
   message: '',
   status: false,
@@ -125,6 +126,7 @@ const loginReducer = (state = initialUserState, action = {}) => {
         ...state,
         error: '',
         loading: true,
+        isLoggedIn: false,
         message: '',
         status: false,
       };
@@ -134,6 +136,7 @@ const loginReducer = (state = initialUserState, action = {}) => {
         ...state,
         user: action.user,
         loading: false,
+        isLoggedIn: true,
         error: '',
         message: action.message,
         status: action.status,
@@ -143,6 +146,7 @@ const loginReducer = (state = initialUserState, action = {}) => {
         ...state,
         user: {},
         loading: false,
+        isLoggedIn: false,
         error: action.error,
         message: action.message,
         status: false,
@@ -651,7 +655,12 @@ const logOutReducer = (state = initialUserState, action = {}) => {
     case LOG_OUT:
       return {
         ...state,
-        initialUserState,
+        user: {},
+        error: null,
+        isLoggedIn: false,
+        loading: false,
+        message: '',
+        status: false,
       };
     default:
       return state;

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 // use of configureStore is recommended. This is for learning purposes
 import {
   legacy_createStore as createStore,
@@ -22,9 +23,11 @@ import {
   adminRejectsRequestReducer,
   donorApprovesRequestReducer,
   donorRejectsRequestReducer,
+  logOutReducer,
 } from './reducer';
+import { LOG_OUT } from './actionTypes';
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   loginState: loginReducer,
   getDonorsState: donorsReducer,
   allMyRequestsState: allMyRequestsReducer,
@@ -40,7 +43,15 @@ const rootReducer = combineReducers({
   adminRejectsRequestState: adminRejectsRequestReducer,
   donorApprovesRequestSate: donorApprovesRequestReducer,
   donorRejectsRequestSate: donorRejectsRequestReducer,
+  logOutState: logOutReducer,
 });
+const rootReducer = (state, action) => {
+  if (action.type === LOG_OUT) {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
