@@ -21,12 +21,14 @@ export default function ApproveButton(props) {
 
     if (isAdmin) {
       dispatch(adminApprovesRequest(id));
-      dispatch(fetchAdminRequests());
+      setTimeout(() => {
+        dispatch(fetchAdminRequests());
+      }, 1500);
     }
     if (isDonor) {
       dispatch(donorApprovesRequest(id));
-      dispatch(fetchDonorRequests(userID));
       setTimeout(() => {
+        dispatch(fetchDonorRequests(userID));
         navigate('/checkout');
       }, 1000);
     }

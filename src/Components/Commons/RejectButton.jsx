@@ -18,11 +18,15 @@ export default function RejectButton(props) {
     const { id } = data;
     if (isAdmin) {
       dispatch(adminRejectsRequest(id));
-      dispatch(fetchAdminRequests());
+      setTimeout(() => {
+        dispatch(fetchAdminRequests());
+      }, 1500);
     }
     if (isDonor) {
       dispatch(donorRejectsRequest(id));
-      dispatch(fetchDonorRequests(userID));
+      setTimeout(() => {
+        dispatch(fetchDonorRequests(userID));
+      }, 1500);
     }
   };
   return (
